@@ -1,5 +1,5 @@
 - name: Install stow
   community.general.homebrew:
-    name: homebrew/cask/stow
+    name: stow
     state: present
     # update_homebrew: yes

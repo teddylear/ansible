@@ -17,3 +17,4 @@ else
     echo "ansible already installed"
 fi
 
+ansible-pull -U https://github.com/teddylear/ansible.git
