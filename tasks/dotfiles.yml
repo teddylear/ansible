@@ -2,4 +2,15 @@
   community.general.homebrew:
     name: stow
     state: present
-    # update_homebrew: yes
+  tags:
+    - dotfiles
+- name: Cloning .dotfiles
+  ansible.builtin.git:
+    repo: 'https://github.com/teddylear/shell_config.git'
+    dest: "{{ lookup('env', 'HOME') }}/shell_config"
+    recursive: yes
+    accept_hostkey: yes
+    version: master
+  tags:
+    - dotfiles
+  # How to link these things?
