@@ -10,7 +10,7 @@
   git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/code/neovim"
-    force: true
+    force: yes
     update: yes
 - name: neovim build
   ansible.builtin.shell: |
