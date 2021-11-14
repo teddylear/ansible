@@ -1,0 +1,10 @@
+- name: Tap nerd fonts
+  community.general.homebrew_tap:
+    name: homebrew/cask-fonts
+    state: present
+- name: Install fonts
+  community.general.homebrew_cask:
+    name: font-hack-nerd-font
+    state: present
+  tags:
+    - devTools
