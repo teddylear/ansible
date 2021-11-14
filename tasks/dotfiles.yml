@@ -14,6 +14,15 @@
     version: master
   tags:
     - dotfiles
+- name: Setup dotfiles
+  ansible.builtin.shell: |
+    stow -R alacritty
+    stow -R zsh
+    stow -R tmux
+    stow -R nvim
+    source ~/.zshrc
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/shell_config"
 - name: neovim plugin and TS parser update
   ansible.builtin.shell: |
     nvim --headless -c "PackerSync" -c "PackerUpdate" -c "TSUpdateSync" -c "q"
