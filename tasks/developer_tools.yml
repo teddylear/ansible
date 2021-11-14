@@ -20,3 +20,20 @@
     state: present
   tags:
     - devTools
+- name: Install tmux
+  community.general.homebrew:
+    name: tmux
+    state: present
+  tags:
+    - devTools
+- name: Install tmux plugin manager
+  git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+    force: yes
+- name: Install ripgrep
+  community.general.homebrew:
+    name: ripgrep
+    state: latest
+  tags:
+    - devTools
