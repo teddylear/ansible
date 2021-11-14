@@ -6,7 +6,7 @@
     - dotfiles
 - name: Cloning .dotfiles
   ansible.builtin.git:
-    repo: 'https://github.com/teddylear/shell_config.git'
+    repo: 'git@github.com:teddylear/shell_config.git'
     dest: "{{ lookup('env', 'HOME') }}/shell_config"
     force: yes
     recursive: yes
