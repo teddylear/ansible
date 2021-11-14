@@ -16,7 +16,22 @@
     state: upgraded
   tags:
     - terminal
-- name: Set zsh as default if not using zsh currently
-  shell: chsh -s $(which zsh)
+      # TODO: Make this only do this if zsh not the default
+# - name: Set zsh as default if not using zsh currently
+  # shell: chsh -s $(which zsh)
+  # tags:
+    # - terminal
+- name: oh-my-zsh
+  ansible.builtin.git:
+    repo: 'https://github.com/robbyrussell/oh-my-zsh'
+    dest: "{{ lookup('env', 'HOME') }}/oh-my-zsh"
+    force: yes
+    accept_hostkey: yes
   tags:
     - terminal
+- name: oh-my-zsh spaceship
+  community.general.homebrew:
+    name: spaceship
+    state: upgraded
+  tags:
+    - devTools
