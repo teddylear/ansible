@@ -1,4 +1,6 @@
 - hosts: localhost
+  # Add pre_task stuff to upgrade things like brew/etc
   tasks:
+   - include: tasks/neovim.yml
    - include: tasks/dotfiles.yml
 
