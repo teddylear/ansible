@@ -16,3 +16,7 @@
     state: upgraded
   tags:
     - terminal
+- name: Set zsh as default if not using zsh currently
+  shell: chsh -s $(which zsh)
+  tags:
+    - terminal
