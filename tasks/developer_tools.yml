@@ -1,0 +1,22 @@
+- name: Install pyenv
+  community.general.homebrew:
+    name: pyenv
+    state: present
+  tags:
+    - devTools
+- name: Install tfenv
+  community.general.homebrew:
+    name: tfenv
+    state: present
+  tags:
+    - devTools
+- name: Tap pkenv
+  community.general.homebrew_tap:
+    name: kwilczynski/homebrew-pkenv
+    state: present
+- name: Install pkenv
+  community.general.homebrew:
+    name: pkenv
+    state: present
+  tags:
+    - devTools
