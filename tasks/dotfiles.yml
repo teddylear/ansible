@@ -14,4 +14,6 @@
     version: master
   tags:
     - dotfiles
-  # How to link these things?
+- name: neovim plugin and TS parser update
+  ansible.builtin.shell: |
+    nvim --headless -c "PackerSync" -c "PackerUpdate" -c "TSUpdateSync" -c "q"
