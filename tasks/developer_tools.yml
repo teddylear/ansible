@@ -87,7 +87,9 @@
     - devTools
     - macos
 - name: Install luacheck
-  shell: luarocks install luacheck
+  shell: |
+    luarocks install argparse
+    luarocks install luacheck
   tags:
     - devTools
 # TODO: add npm/treesitter module/anything else I can thing of?
