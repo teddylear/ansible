@@ -43,3 +43,15 @@
     state: latest
   tags:
     - devTools
+- name: Install tree
+  community.general.homebrew:
+    name: tree
+    state: latest
+  tags:
+    - devTools
+- name: Install jq
+  community.general.homebrew:
+    name: jq
+    state: latest
+  tags:
+    - devTools
