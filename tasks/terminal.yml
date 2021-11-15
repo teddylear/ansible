@@ -34,4 +34,16 @@
     name: spaceship
     state: upgraded
   tags:
-    - devTools
+    - terminal
+- name: Install zsh-syntax-highlighting
+  community.general.homebrew:
+    name: zsh-syntax-highlighting
+    state: latest
+  tags:
+    - terminal
+- name: Install zsh-autosuggestions
+  community.general.homebrew:
+    name: zsh-autosuggestions
+    state: latest
+  tags:
+    - terminal
