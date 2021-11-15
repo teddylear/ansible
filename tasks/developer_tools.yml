@@ -78,3 +78,16 @@
   tags:
     - devTools
     - macos
+- name: Install luarocks
+  community.general.homebrew:
+    name:  luarocks
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+    - macos
+- name: Install luacheck
+  shell: luarocks install luacheck
+  tags:
+    - devTools
+# TODO: add npm/treesitter module/anything else I can thing of?
