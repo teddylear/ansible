@@ -5,6 +5,7 @@
     rust_version: '1.56.1'
   tasks:
     # TODO: Should have something in beginning for curl and brew installation
+   - include: tasks/window_management.yml
    - include: tasks/terminal.yml
    - include: tasks/golang.yml
    - include: tasks/rust.yml
