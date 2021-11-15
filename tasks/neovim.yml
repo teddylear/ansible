@@ -12,12 +12,12 @@
     dest: "{{ lookup('env', 'HOME') }}/code/neovim"
     force: yes
     update: yes
-# - name: neovim build
-  # ansible.builtin.shell: |
-    # make distclean
-    # make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/Users/kennethlear/local/nvim/ install
-  # args:
-      # chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
+- name: neovim build
+  ansible.builtin.shell: |
+    make distclean
+    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/Users/kennethlear/local/nvim/ install
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
 - name: setup packer
   git:
     repo: 'https://github.com/wbthomason/packer.nvim'
