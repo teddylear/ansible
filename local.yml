@@ -1,6 +1,9 @@
 - hosts: localhost
   # Add pre_task stuff to upgrade things like brew/etc
+  vars:
+    go_version: '1.17.3'
   tasks:
+   - include: tasks/golang.yml
    - include: tasks/terminal.yml
    - include: tasks/developer_tools.yml
    - include: tasks/neovim.yml
