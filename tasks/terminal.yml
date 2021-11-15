@@ -4,18 +4,21 @@
     state: present
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
 - name: Install fonts
   community.general.homebrew_cask:
     name: font-hack-nerd-font
     state: present
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
 - name: Install alacritty
   community.general.homebrew_cask:
     name: alacritty
     state: upgraded
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
       # TODO: Make this only do this if zsh not the default
 # - name: Set zsh as default if not using zsh currently
   # shell: chsh -s $(which zsh)
@@ -35,15 +38,18 @@
     state: upgraded
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
 - name: Install zsh-syntax-highlighting
   community.general.homebrew:
     name: zsh-syntax-highlighting
     state: latest
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
 - name: Install zsh-autosuggestions
   community.general.homebrew:
     name: zsh-autosuggestions
     state: latest
   tags:
     - terminal
+  when: ansible_distribution == "MacOSX"
