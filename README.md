@@ -6,11 +6,14 @@ Currently [dotfiles repo is here](https://github.com/teddylear/shell_config)
 
 **NOTE** Have to sign out user or logout to get working
 
-TODO:
+## TODO List:
 - macos
-    - amethyst
-    - caffeine
     - pipenv bug
-    - zsh default bug
+    - treesitter-cli via npm?
+    - aws cli?
 - ubuntu
     - everything
+- General
+    - ninja for nvim builds
+    - zsh default bug
+    - How to only update/build vim
