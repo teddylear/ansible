@@ -2,6 +2,7 @@
   community.general.homebrew:
     name: stow
     state: present
+  when: ansible_distribution == "MacOSX"
   tags:
     - dotfiles
 - name: Cloning .dotfiles
