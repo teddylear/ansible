@@ -92,4 +92,12 @@
     luarocks install luacheck
   tags:
     - devTools
+- name: Install pipenv
+  community.general.homebrew:
+    name:  pipenv
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+    - macos
 # TODO: add npm/treesitter module/anything else I can thing of?
