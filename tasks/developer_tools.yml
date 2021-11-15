@@ -37,3 +37,9 @@
     state: latest
   tags:
     - devTools
+- name: Install docker
+  community.general.homebrew:
+    name: docker
+    state: latest
+  tags:
+    - devTools
