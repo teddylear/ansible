@@ -2,24 +2,34 @@
   file:
     path: "{{ lookup('env', 'HOME') }}/code"
     state: directory
+  tags:
+    - neovim
 - name: Make local directory for neovim build
   file:
     path: "{{ lookup('env', 'HOME') }}/local"
     state: directory
+  tags:
+    - neovim
 - name: Clone Neovim
   git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/code/neovim"
     force: yes
     update: yes
+  tags:
+    - neovim
 - name: neovim build
   ansible.builtin.shell: |
     make distclean
     make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/Users/kennethlear/local/nvim/ install
   args:
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
+  tags:
+    - neovim
 - name: setup packer
   git:
     repo: 'https://github.com/wbthomason/packer.nvim'
     dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
     depth: 1
+  tags:
+    - neovim
