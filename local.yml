@@ -2,9 +2,12 @@
   # Add pre_task stuff to upgrade things like brew/etc
   vars:
     go_version: '1.17.3'
+    rust_version: '1.56.1'
   tasks:
-   - include: tasks/golang.yml
+    # TODO: Should have something in beginning for curl and brew installation
    - include: tasks/terminal.yml
+   - include: tasks/golang.yml
+   - include: tasks/rust.yml
    - include: tasks/developer_tools.yml
    - include: tasks/neovim.yml
    - include: tasks/dotfiles.yml
