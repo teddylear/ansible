@@ -6,3 +6,11 @@
   tags:
     - window_management
     - macos
+- name: Install caffeine
+  community.general.homebrew_cask:
+    name: caffeine
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - window_management
+    - macos
