@@ -5,6 +5,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install tfenv
   community.general.homebrew:
     name: tfenv
@@ -12,6 +13,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Tap pkenv
   community.general.homebrew_tap:
     name: kwilczynski/homebrew-pkenv
@@ -19,6 +21,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install pkenv
   community.general.homebrew:
     name: pkenv
@@ -26,6 +29,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install tmux
   community.general.homebrew:
     name: tmux
@@ -33,6 +37,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install tmux plugin manager
   git:
     repo: 'https://github.com/tmux-plugins/tpm'
@@ -41,6 +46,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install ripgrep
   community.general.homebrew:
     name: ripgrep
@@ -48,6 +54,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install docker
   community.general.homebrew:
     name: docker
@@ -55,12 +62,14 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos
 - name: Install tree
   community.general.homebrew:
     name: tree
     state: latest
   tags:
     - devTools
+    - macos
 - name: Install jq
   community.general.homebrew:
     name: jq
@@ -68,3 +77,4 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
+    - macos

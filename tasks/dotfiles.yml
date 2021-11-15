@@ -5,6 +5,7 @@
   when: ansible_distribution == "MacOSX"
   tags:
     - dotfiles
+    - macos
 - name: Cloning .dotfiles
   ansible.builtin.git:
     repo: 'git@github.com:teddylear/shell_config.git'
