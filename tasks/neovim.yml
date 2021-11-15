@@ -26,7 +26,7 @@
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
   tags:
     - neovim
-- name: setup packer
+- name: setup packer nvim
   git:
     repo: 'https://github.com/wbthomason/packer.nvim'
     dest: "{{ lookup('env', 'HOME') }}/.local/share/nvim/site/pack/packer/start/packer.nvim"
