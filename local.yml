@@ -12,4 +12,5 @@
    - include: tasks/developer_tools.yml
    - include: tasks/neovim.yml
    - include: tasks/dotfiles.yml
+   - include: tasks/cargo-tools.yml
 
