@@ -1,3 +1,4 @@
+# TODO: How to automate font on ubuntu
 - name: Tap nerd fonts
   community.general.homebrew_tap:
     name: homebrew/cask-fonts
@@ -6,6 +7,7 @@
   tags:
     - terminal
     - macos
+- name:
 - name: Install fonts
   community.general.homebrew_cask:
     name: font-hack-nerd-font
@@ -22,7 +24,23 @@
   tags:
     - terminal
     - macos
-      # TODO: Make this only do this if zsh not the default
+- name: Install alacritty apt repository
+  apt_repository:
+    repo: ppa:aslatter/ppa
+    state: present
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
+- name: Install alacritty
+  apt:
+    name: alacritty
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
+# TODO: Make this only do this if zsh not the default
 # - name: Set zsh as default if not using zsh currently
   # shell: chsh -s $(which zsh)
   # tags:
@@ -35,7 +53,6 @@
     accept_hostkey: yes
   tags:
     - terminal
-    - macos
 - name: oh-my-zsh spaceship
   community.general.homebrew:
     name: spaceship
