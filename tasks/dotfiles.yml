@@ -25,6 +25,7 @@
     stow -R nvim
     source ~/.zshrc
   args:
+      executable: /bin/zsh
       chdir: "{{ lookup('env', 'HOME') }}/shell_config"
 - name: neovim plugin and TS parser update
   ansible.builtin.shell: |
