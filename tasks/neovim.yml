@@ -19,7 +19,7 @@
     - devTools
     - macos
 - name: Clone Neovim
-  git:
+  ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'
     dest: "{{ lookup('env', 'HOME') }}/code/neovim"
     force: yes

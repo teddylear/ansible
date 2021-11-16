@@ -67,6 +67,7 @@
   community.general.homebrew:
     name: tree
     state: latest
+  when: ansible_distribution == "MacOSX"
   tags:
     - devTools
     - macos
@@ -90,6 +91,14 @@
   shell: |
     luarocks install argparse
     luarocks install luacheck
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+- name: Install luacheck
+  shell: |
+    sudo luarocks install argparse
+    sudo luarocks install luacheck
+  when: ansible_distribution == "Ubuntu"
   tags:
     - devTools
 # TODO: fix flips back to system python

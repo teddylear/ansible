@@ -60,6 +60,12 @@
   tags:
     - terminal
     - macos
+# - name: oh-my-zsh spaceship
+  # shell: curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
+  # when: ansible_distribution == "Ubuntu"
+  # tags:
+    # - terminal
+    # - macos
 - name: Install zsh-syntax-highlighting
   community.general.homebrew:
     name: zsh-syntax-highlighting

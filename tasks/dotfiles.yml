@@ -6,16 +6,16 @@
   tags:
     - dotfiles
     - macos
-- name: Cloning .dotfiles
-  ansible.builtin.git:
-    repo: 'git@github.com:teddylear/shell_config.git'
-    dest: "{{ lookup('env', 'HOME') }}/shell_config"
-    force: yes
-    recursive: yes
-    accept_hostkey: yes
-    version: master
-  tags:
-    - dotfiles
+# - name: Cloning .dotfiles
+  # ansible.builtin.git:
+    # repo: 'git@github.com:teddylear/shell_config.git'
+    # dest: "{{ lookup('env', 'HOME') }}/shell_config"
+    # force: yes
+    # recursive: yes
+    # accept_hostkey: yes
+    # version: master
+  # tags:
+    # - dotfiles
 # TODO: Should update this
 - name: Setup dotfiles
   ansible.builtin.shell: |
