@@ -10,6 +10,14 @@
     state: directory
   tags:
     - neovim
+- name: Install ninja
+  community.general.homebrew:
+    name: ninja
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+    - macos
 - name: Clone Neovim
   git:
     repo: 'https://github.com/neovim/neovim.git'
@@ -21,7 +29,7 @@
 - name: neovim build
   ansible.builtin.shell: |
     make distclean
-    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX=/Users/kennethlear/local/nvim/ install
+    make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX={{ lookup('env', 'HOME') }}/local/nvim/ install
   args:
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
   tags:

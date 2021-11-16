@@ -1,7 +1,7 @@
 - name: Install pyenv
   community.general.homebrew:
     name: pyenv
-    state: present
+    state: latest
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
@@ -9,7 +9,7 @@
 - name: Install tfenv
   community.general.homebrew:
     name: tfenv
-    state: present
+    state: latest
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
@@ -25,7 +25,7 @@
 - name: Install pkenv
   community.general.homebrew:
     name: pkenv
-    state: present
+    state: latest
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools
@@ -33,7 +33,7 @@
 - name: Install tmux
   community.general.homebrew:
     name: tmux
-    state: present
+    state: latest
   when: ansible_distribution == "MacOSX"
   tags:
     - devTools

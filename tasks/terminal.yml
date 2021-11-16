@@ -7,7 +7,6 @@
   tags:
     - terminal
     - macos
-- name:
 - name: Install fonts
   community.general.homebrew_cask:
     name: font-hack-nerd-font
