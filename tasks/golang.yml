@@ -17,3 +17,9 @@
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
   tags:
     - golang
+- name: Setup go directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/go"
+    state: directory
+  tags:
+    - golang
