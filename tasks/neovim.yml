@@ -1,3 +1,11 @@
+- name: Install neovim build tools
+  apt:
+    name: ["cmake", "gettext", "ninja-build"]
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - neovim
+    - ubuntu
 - name: Make code directory
   file:
     path: "{{ lookup('env', 'HOME') }}/code"

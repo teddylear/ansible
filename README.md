@@ -12,8 +12,8 @@ Currently [dotfiles repo is here](https://github.com/teddylear/shell_config)
     - treesitter-cli via npm?
     - aws cli?
 - ubuntu
+    - automate Install ansible for start
     - everything
 - General
-    - ninja for nvim builds
     - zsh default bug
     - How to only update/build vim

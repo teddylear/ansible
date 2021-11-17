@@ -1,3 +1,4 @@
+# TODO: pyenv ubuntu
 - name: Install pyenv
   community.general.homebrew:
     name: pyenv
@@ -6,6 +7,7 @@
   tags:
     - devTools
     - macos
+# TODO: tfenv ubuntu
 - name: Install tfenv
   community.general.homebrew:
     name: tfenv
@@ -14,6 +16,7 @@
   tags:
     - devTools
     - macos
+# TODO: pkenv ubuntu
 - name: Tap pkenv
   community.general.homebrew_tap:
     name: kwilczynski/homebrew-pkenv
@@ -87,6 +90,22 @@
   tags:
     - devTools
     - macos
+- name: Install luarocks
+  community.general.homebrew:
+    name:  luarocks
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+    - macos
+- name: Install luarocks
+  apt:
+    name: luarocks
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - devTools
+    - ubuntu
 - name: Install luacheck
   shell: |
     luarocks install argparse
@@ -95,9 +114,10 @@
   tags:
     - devTools
 - name: Install luacheck
+  become: True
   shell: |
-    sudo luarocks install argparse
-    sudo luarocks install luacheck
+    luarocks install argparse
+    luarocks install luacheck
   when: ansible_distribution == "Ubuntu"
   tags:
     - devTools
@@ -111,3 +131,11 @@
     # - devTools
     # - macos
 # TODO: add npm/treesitter module/anything else I can thing of?
+- name: devtools
+  apt:
+    name: ["luarocks", "jq", "tree", "tmux", "docker", "ripgrep"]
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - devTools
+    - ubuntu

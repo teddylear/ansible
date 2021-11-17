@@ -27,6 +27,7 @@
   apt_repository:
     repo: ppa:aslatter/ppa
     state: present
+    update_cache: True
   when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
@@ -74,6 +75,14 @@
   tags:
     - terminal
     - macos
+- name: Install zsh-syntax-highlighting
+  apt:
+    name: zsh-syntax-highlighting
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
 - name: Install zsh-autosuggestions
   community.general.homebrew:
     name: zsh-autosuggestions
@@ -82,3 +91,12 @@
   tags:
     - terminal
     - macos
+- name: Install zsh-autosuggestions
+  become: True
+  apt:
+    name: zsh-autosuggestions
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
