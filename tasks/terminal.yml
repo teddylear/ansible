@@ -92,7 +92,7 @@
     - terminal
     - macos
 - name: Install zsh-autosuggestions
-  become: True
+  become: yes
   apt:
     name: zsh-autosuggestions
     state: latest

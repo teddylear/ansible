@@ -114,7 +114,7 @@
   tags:
     - devTools
 - name: Install luacheck
-  become: True
+  become: yes
   shell: |
     luarocks install argparse
     luarocks install luacheck
@@ -136,6 +136,7 @@
     name: ["luarocks", "jq", "tree", "tmux", "docker", "ripgrep"]
     state: latest
   when: ansible_distribution == "Ubuntu"
+  become: yes
   tags:
     - devTools
     - ubuntu
