@@ -11,7 +11,7 @@
     # - devTools
     # - macos
     #
-- name: devTools
+- name: devTools Macos
   community.general.homebrew:
     name: ["pyenv", "tfenv", "pkenv", "tmux", "ripgrep", "docker", "tree", "jq", "luarocks"]
     state: latest
@@ -19,7 +19,7 @@
   tags:
     - devTools
     - macos
-- name: devtools
+- name: devtools Ubuntu
   apt:
     name: ["luarocks", "jq", "tree", "tmux", "docker", "ripgrep"]
     state: latest

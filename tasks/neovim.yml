@@ -1,4 +1,4 @@
-- name: Install neovim build tools
+- name: Install neovim build tools ubuntu
   apt:
     name: ["cmake", "gettext", "ninja-build"]
     state: latest
@@ -6,14 +6,14 @@
   tags:
     - neovim
     - ubuntu
-- name: Install neovim build tools
+- name: Install neovim build tools macos
   community.general.homebrew:
     name: ["ninja"]
     state: latest
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "MacOSX"
   tags:
     - neovim
-    - ubuntu
+    - macos
 - name: Make code directory
   file:
     path: "{{ lookup('env', 'HOME') }}/code"
