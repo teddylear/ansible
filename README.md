@@ -4,7 +4,8 @@ Attempt to automate setting up dependencies and install dotfiles on new machine
 
 Currently [dotfiles repo is here](https://github.com/teddylear/shell_config)
 
-**NOTE** Have to sign out user or logout to get working
+run `make install` and input password to install
+
 
 ## TODO List:
 - macos
@@ -17,3 +18,4 @@ Currently [dotfiles repo is here](https://github.com/teddylear/shell_config)
 - General
     - zsh default bug
     - How to only update/build vim
+    - ssh
