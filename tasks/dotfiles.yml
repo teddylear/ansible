@@ -10,8 +10,7 @@
   ansible.builtin.git:
     repo: 'git@github.com:teddylear/shell_config.git'
     dest: "{{ lookup('env', 'HOME') }}/shell_config"
-    force: yes
-    recursive: yes
+    update: yes
     accept_hostkey: yes
     version: master
   tags:
