@@ -1,126 +1,6 @@
 # TODO: pyenv ubuntu
-- name: Install pyenv
-  community.general.homebrew:
-    name: pyenv
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
 # TODO: tfenv ubuntu
-- name: Install tfenv
-  community.general.homebrew:
-    name: tfenv
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
 # TODO: pkenv ubuntu
-- name: Tap pkenv
-  community.general.homebrew_tap:
-    name: kwilczynski/homebrew-pkenv
-    state: present
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install pkenv
-  community.general.homebrew:
-    name: pkenv
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install tmux
-  community.general.homebrew:
-    name: tmux
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install tmux plugin manager
-  git:
-    repo: 'https://github.com/tmux-plugins/tpm'
-    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
-    force: yes
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install ripgrep
-  community.general.homebrew:
-    name: ripgrep
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install docker
-  community.general.homebrew:
-    name: docker
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install tree
-  community.general.homebrew:
-    name: tree
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install jq
-  community.general.homebrew:
-    name: jq
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install luarocks
-  community.general.homebrew:
-    name:  luarocks
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install luarocks
-  community.general.homebrew:
-    name:  luarocks
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
-- name: Install luarocks
-  apt:
-    name: luarocks
-    state: latest
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - devTools
-    - ubuntu
-- name: Install luacheck
-  shell: |
-    luarocks install argparse
-    luarocks install luacheck
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-- name: Install luacheck
-  become: yes
-  shell: |
-    luarocks install argparse
-    luarocks install luacheck
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - devTools
 # TODO: fix flips back to system python
 # - name: Install pipenv
   # community.general.homebrew:
@@ -130,7 +10,15 @@
   # tags:
     # - devTools
     # - macos
-# TODO: add npm/treesitter module/anything else I can thing of?
+    #
+- name: devTools
+  community.general.homebrew:
+    name: ["pyenv", "tfenv", "pkenv", "tmux", "ripgrep", "docker", "tree", "jq", "luarocks"]
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - devTools
+    - macos
 - name: devtools
   apt:
     name: ["luarocks", "jq", "tree", "tmux", "docker", "ripgrep"]
@@ -140,3 +28,18 @@
   tags:
     - devTools
     - ubuntu
+- name: Install tmux plugin manager
+  git:
+    repo: 'https://github.com/tmux-plugins/tpm'
+    dest: "{{ lookup('env', 'HOME') }}/.tmux/plugins/tpm"
+    force: yes
+  tags:
+    - devTools
+    - macos
+- name: Install luacheck
+  become: yes
+  shell: |
+    luarocks install argparse
+    luarocks install luacheck
+  tags:
+    - devTools
