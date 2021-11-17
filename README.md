@@ -1,5 +1,7 @@
 # Ansible
 
+Inspired by [ThePrimeagen's ansible repo](https://github.com/ThePrimeagen/ansible/)
+
 Attempt to automate setting up dependencies and install dotfiles on new machine
 
 Currently [dotfiles repo is here](https://github.com/teddylear/shell_config)
