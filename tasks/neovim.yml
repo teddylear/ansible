@@ -6,6 +6,14 @@
   tags:
     - neovim
     - ubuntu
+- name: Install neovim build tools
+  community.general.homebrew:
+    name: ["ninja"]
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - neovim
+    - ubuntu
 - name: Make code directory
   file:
     path: "{{ lookup('env', 'HOME') }}/code"
@@ -18,14 +26,6 @@
     state: directory
   tags:
     - neovim
-- name: Install ninja
-  community.general.homebrew:
-    name: ninja
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - devTools
-    - macos
 - name: Clone Neovim
   ansible.builtin.git:
     repo: 'https://github.com/neovim/neovim.git'

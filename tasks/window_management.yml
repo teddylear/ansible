@@ -1,14 +1,6 @@
-- name: Install amethyst
+- name: Install window management
   community.general.homebrew_cask:
-    name: amethyst
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - window_management
-    - macos
-- name: Install caffeine
-  community.general.homebrew_cask:
-    name: caffeine
+    name: ["amethyst", "caffeine"]
     state: latest
   when: ansible_distribution == "MacOSX"
   tags:

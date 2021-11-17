@@ -53,50 +53,26 @@
     accept_hostkey: yes
   tags:
     - terminal
-- name: oh-my-zsh spaceship
-  community.general.homebrew:
-    name: spaceship
-    state: upgraded
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - terminal
-    - macos
 # - name: oh-my-zsh spaceship
   # shell: curl -o - https://raw.githubusercontent.com/denysdovhan/spaceship-zsh-theme/master/install.zsh | zsh
   # when: ansible_distribution == "Ubuntu"
   # tags:
     # - terminal
     # - macos
-- name: Install zsh-syntax-highlighting
-  community.general.homebrew:
-    name: zsh-syntax-highlighting
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - terminal
-    - macos
-- name: Install zsh-syntax-highlighting
-  apt:
-    name: zsh-syntax-highlighting
-    state: latest
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - terminal
-    - ubuntu
-- name: Install zsh-autosuggestions
-  community.general.homebrew:
-    name: zsh-autosuggestions
-    state: latest
-  when: ansible_distribution == "MacOSX"
-  tags:
-    - terminal
-    - macos
-- name: Install zsh-autosuggestions
+- name: Install Terminal stuff
   become: yes
   apt:
-    name: zsh-autosuggestions
+    name: ["zsh-autosuggestions", "zsh-syntax-highlighting"]
     state: latest
   when: ansible_distribution == "Ubuntu"
   tags:
     - terminal
     - ubuntu
+- name: Install Terminal stuff
+  community.general.homebrew:
+    name: ["spaceship", "zsh-autosuggestions", "zsh-syntax-highlighting"]
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - terminal
+    - macos
