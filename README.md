@@ -17,7 +17,7 @@ run `make install` and input password to install
     - amtheyst settings
 - ubuntu
     - automate Install ansible for start
-    - everything
+    - apt update and upgrade
     - one liner for install
     - extra stow commands for compton and i3
 - General
