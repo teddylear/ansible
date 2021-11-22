@@ -5,6 +5,15 @@
     rust_version: '1.56.1'
   tasks:
     # TODO: Should have something in beginning for curl and brew installation
+   - name: Update and upgrade apt packages
+     become: true
+     apt:
+       upgrade: yes
+       update_cache: yes
+       cache_valid_time: 86400 #One day
+     when: ansible_distribution == "Ubuntu"
+     tags:
+       - ubuntu
    - include: tasks/window_management.yml
    - include: tasks/terminal.yml
    - include: tasks/golang.yml
