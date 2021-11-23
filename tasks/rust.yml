@@ -6,7 +6,7 @@
     - rust
 - name: Install rust
   ansible.builtin.shell: curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh -s -- -y""
-  when: ansible_distribution == "MacOSX" and check_rust.rc != 0
+  when: check_rust.rc != 0
   args:
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
   tags:

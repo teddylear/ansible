@@ -1,4 +1,4 @@
-default: build run
+default: build test
 
 install:
 	ANSIBLE_NOCOWS=1 ansible-playbook local.yml --ask-become-pass
