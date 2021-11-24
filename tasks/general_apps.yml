@@ -1,0 +1,8 @@
+- name: VLC Media player
+  community.general.homebrew_cask:
+    name: "vlc"
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - vlc
+    - macos

@@ -15,6 +15,7 @@
      tags:
        - ubuntu
    - include: tasks/window_management.yml
+   - include: tasks/general_apps.yml
    - include: tasks/terminal.yml
    - include: tasks/golang.yml
    - include: tasks/rust.yml
