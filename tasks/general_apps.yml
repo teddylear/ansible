@@ -6,3 +6,12 @@
   tags:
     - vlc
     - macos
+- name: VLC Media player
+  apt:
+    name: "vlc"
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  become: yes
+  tags:
+    - vlc
+    - ubuntu
