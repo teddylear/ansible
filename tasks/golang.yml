@@ -10,7 +10,21 @@
     state: directory
   tags:
     - golang
-- name: Install golang
+- name: Install golang ubuntu
+  become: yes
+  ansible.builtin.shell: |
+    rm -rf go{{ go_version }}.linux-amd64.tar.gz
+    curl -O -L "https://golang.org/dl/go{{ go_version }}.linux-amd64.tar.gz"
+    rm -rf go
+    tar -xf go{{ go_version }}.linux-amd64.tar.gz
+    rm -rf /usr/local/go
+    mv -v go /usr/local
+  when: check_go.rc != 0 and ansible_distribution == "Ubuntu"
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/Downloads"
+  tags:
+    - golang
+- name: Install golang macos
   become: yes
   ansible.builtin.shell: |
     rm -rf go{{ go_version }}.darwin-amd64.tar.gz
@@ -19,7 +33,7 @@
     tar -xf go{{ go_version }}.darwin-amd64.tar.gz
     rm -rf /usr/local/go
     mv -v go /usr/local
-  when: check_go.rc != 0
+  when: check_go.rc != 0 and ansible_distribution == "MacOSX"
   args:
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
   tags:
