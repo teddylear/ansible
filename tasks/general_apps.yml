@@ -1,4 +1,4 @@
-- name: VLC Media player
+- name: VLC Media player Macos
   community.general.homebrew_cask:
     name: "vlc"
     state: latest
@@ -6,7 +6,7 @@
   tags:
     - vlc
     - macos
-- name: VLC Media player
+- name: VLC Media player Ubuntu
   apt:
     name: "vlc"
     state: latest
@@ -15,3 +15,11 @@
   tags:
     - vlc
     - ubuntu
+- name: Brave Browser Macos
+  community.general.homebrew_cask:
+    name: "brave-browser"
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - brave
+    - macos
