@@ -38,7 +38,6 @@
   become: yes
   ansible.builtin.shell: |
     make distclean
-    # make CMAKE_BUILD_TYPE=Release CMAKE_INSTALL_PREFIX={{ lookup('env', 'HOME') }}/local/nvim/ install
     make CMAKE_BUILD_TYPE=Release install
   args:
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
