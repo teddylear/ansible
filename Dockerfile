@@ -9,4 +9,4 @@ RUN apt update && \
     apt update && \
     apt install -y curl git ansible build-essential
 COPY . .
-CMD ["sh", "-c", "ansible-playbook local.yml --tags \"window_management\""]
+CMD ["sh", "-c", "ansible-playbook local.yml --tags \"terminal\""]

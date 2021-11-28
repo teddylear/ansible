@@ -1,4 +1,22 @@
 # TODO: How to automate font on ubuntu
+- name: Install zsh
+  become: yes
+  apt:
+    name: zsh
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
+- name: zsh path
+  shell: which zsh
+  register: zsh_path
+  tags:
+    - terminal
+- name: Change shell to zsh
+  become: yes
+  shell: chsh -s {{ zsh_path.stdout }}
+  tags:
+    - terminal
 - name: Tap nerd fonts
   community.general.homebrew_tap:
     name: homebrew/cask-fonts
