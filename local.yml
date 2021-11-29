@@ -15,6 +15,7 @@
      tags:
        - ubuntu
        - neovim
+       - devTools
   tasks:
     # TODO: Should have something in beginning for curl and brew installation
    - include: tasks/window_management.yml
