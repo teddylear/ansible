@@ -28,8 +28,18 @@
       chdir: "{{ lookup('env', 'HOME') }}/shell_config"
   tags:
     - dotfiles
-- name: Setup i3, compton
+- name: Setup alacritty-macos
   ansible.builtin.shell: |
+    stow -R alacritty-macos
+  args:
+      executable: /bin/zsh
+      chdir: "{{ lookup('env', 'HOME') }}/shell_config"
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - dotfiles
+- name: Setup i3, compton, alacritty
+  ansible.builtin.shell: |
+    stow -R alacritty
     stow -R i3
     stow -R compton
   args:
