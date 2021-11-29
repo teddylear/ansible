@@ -3,17 +3,20 @@
   vars:
     go_version: '1.17.3'
     rust_version: '1.56.1'
-  tasks:
-    # TODO: Should have something in beginning for curl and brew installation
+  pre_tasks:
    - name: Update and upgrade apt packages
      become: yes
      apt:
        upgrade: yes
        update_cache: yes
+       force_apt_get: yes
        cache_valid_time: 86400 #One day
      when: ansible_distribution == "Ubuntu"
      tags:
        - ubuntu
+       - neovim
+  tasks:
+    # TODO: Should have something in beginning for curl and brew installation
    - include: tasks/window_management.yml
    - include: tasks/general_apps.yml
    - include: tasks/terminal.yml
