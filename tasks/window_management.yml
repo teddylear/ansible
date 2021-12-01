@@ -25,3 +25,23 @@
   tags:
     - window_management
     - ubuntu
+- name: Add i3-gaps apt-repo
+  become: yes
+  ansible.builtin.apt_repository:
+    repo: 'ppa:regolith-linux/release'
+    state: present
+  tags:
+    - window_management
+    - ubuntu
+    - i3-gaps
+- name: Install desktop stuff
+  become: yes
+  apt:
+    name: "i3-gaps"
+    update_cache: yes
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - window_management
+    - ubuntu
+    - i3-gaps
