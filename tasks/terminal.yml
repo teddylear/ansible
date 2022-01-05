@@ -145,3 +145,10 @@
     - terminal
     - mcfly
     - macos
+- name: Install Mcfly Ubuntu
+  shell: curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly
+  when: ansible_distribution == "Ubuntu" and mcfly_installed is failed
+  tags:
+    - terminal
+    - mcfly
+    - ubuntu
