@@ -77,7 +77,7 @@
   # tags:
     # - terminal
     # - macos
-- name: Install Terminal stuff
+- name: Install Terminal stuff ubuntu
   become: yes
   apt:
     name: ["zsh-autosuggestions", "zsh-syntax-highlighting"]
@@ -86,11 +86,27 @@
   tags:
     - terminal
     - ubuntu
-- name: Install Terminal stuff
+- name: Install Terminal stuff macos
   community.general.homebrew:
     name: ["spaceship", "zsh-autosuggestions", "zsh-syntax-highlighting"]
     state: latest
   when: ansible_distribution == "MacOSX"
   tags:
     - terminal
+    - macos
+- name: Check for neofetch Installation
+  shell: which neofetch
+  register: neofetch_installed
+  ignore_errors: yes
+  tags:
+    - terminal
+    - neofetch
+- name: Install neofetch macos
+  community.general.homebrew:
+    name: "neofetch"
+    state: latest
+  when: ansible_distribution == "MacOSX" and neofetch_installed is failed
+  tags:
+    - terminal
+    - neofetch
     - macos
