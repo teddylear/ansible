@@ -110,3 +110,13 @@
     - terminal
     - neofetch
     - macos
+- name: Install neofetch Ubuntu
+  become: yes
+  apt:
+    name: "neofetch"
+    state: latest
+  when: ansible_distribution == "Ubuntu" and neofetch_installed is failed
+  tags:
+    - terminal
+    - neofetch
+    - ubuntu
