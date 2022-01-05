@@ -9,4 +9,4 @@ RUN apt update && \
     apt update && \
     apt install -y curl git ansible build-essential
 COPY . .
-CMD ["sh", "-c", "ansible-playbook local.yml --tags \"neofetch\""]
+CMD ["sh", "-c", "ansible-playbook local.yml --tags \"mcfly\""]

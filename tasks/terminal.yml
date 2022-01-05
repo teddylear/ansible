@@ -120,3 +120,28 @@
     - terminal
     - neofetch
     - ubuntu
+- name: Check for Mcfly Installation
+  shell: which mcfly
+  register: mcfly_installed
+  ignore_errors: yes
+  tags:
+    - terminal
+    - mcfly
+- name: Tap Mcfly macos
+  community.general.homebrew_tap:
+    name: cantino/mcfly
+    state: present
+  when: ansible_distribution == "MacOSX" and mcfly_installed is failed
+  tags:
+    - terminal
+    - mcfly
+    - macos
+- name: Install Mcfly macos
+  community.general.homebrew:
+    name: "mcfly"
+    state: latest
+  when: ansible_distribution == "MacOSX" and mcfly_installed is failed
+  tags:
+    - terminal
+    - mcfly
+    - macos
