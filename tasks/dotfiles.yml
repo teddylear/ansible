@@ -15,18 +15,24 @@
     version: master
   tags:
     - dotfiles
-# TODO: Should update this?
 - name: Setup dotfiles
   ansible.builtin.shell: |
-    stow -R alacritty
     stow -R zsh
     stow -R tmux
     stow -R nvim
     source ~/.zshrc
-  when: ansible_distribution == "Ubuntu"
   args:
       executable: /bin/zsh
       chdir: "{{ lookup('env', 'HOME') }}/shell_config"
+  tags:
+    - dotfiles
+- name: Setup alacritty ubuntu
+  ansible.builtin.shell: |
+    stow -R alacritty
+  args:
+      executable: /bin/zsh
+      chdir: "{{ lookup('env', 'HOME') }}/shell_config"
+  when: ansible_distribution == "Ubuntu"
   tags:
     - dotfiles
 - name: Setup alacritty-macos
