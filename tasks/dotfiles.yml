@@ -17,6 +17,7 @@
     - dotfiles
 - name: Setup dotfiles
   ansible.builtin.shell: |
+    omz update
     stow -R zsh
     stow -R tmux
     stow -R nvim
