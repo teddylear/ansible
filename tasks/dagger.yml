@@ -1,0 +1,16 @@
+- name: Check dagger installed
+  ansible.builtin.shell: type dagger
+  register: check_dagger
+  ignore_errors: true
+  tags:
+    - dagger
+- name: Install dagger linux
+  ansible.builtin.shell: curl -L https://dl.dagger.io/dagger/install.sh | sh
+  when: ansible_distribution == "Ubuntu" and check_dagger.rc != 0
+  become: yes
+  args:
+      chdir: "/usr/local"
+  when:
+  tags:
+    - dagger
+# TODO: Install dagger macos

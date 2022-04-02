@@ -27,4 +27,5 @@
    - include: tasks/neovim.yml
    - include: tasks/dotfiles.yml
    - include: tasks/cargo-tools.yml
+   - include: tasks/dagger.yml
 
