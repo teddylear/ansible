@@ -10,7 +10,12 @@
   become: yes
   args:
       chdir: "/usr/local"
-  when:
   tags:
     - dagger
-# TODO: Install dagger macos
+- name: Install dagger macos
+  community.general.homebrew:
+    name: "dagger/tap/dagger"
+    state: latest
+  when: ansible_distribution == "MacOSX" and check_dagger.rc != 0
+  tags:
+    - dagger
