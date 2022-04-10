@@ -15,6 +15,29 @@
     version: master
   tags:
     - dotfiles
+- name: Check polybar installed
+  ansible.builtin.shell: type polybar
+  when: ansible_distribution == "Ubuntu"
+  register: check_polybar
+  ignore_errors: true
+  tags:
+    - polybar
+- name: Install polybar
+  apt:
+    name: polybar
+    state: present
+  when: ansible_distribution == "Ubuntu" and check_polybar.rc != 0
+  become: yes
+  tags:
+    - polybar
+- name: Setup polybar stow
+  ansible.builtin.shell: |
+    stow -R polybar
+  args:
+      executable: /bin/zsh
+      chdir: "{{ lookup('env', 'HOME') }}/shell_config"
+  tags:
+    - polybar
 - name: Setup dotfiles
   ansible.builtin.shell: |
     omz update
