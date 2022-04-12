@@ -153,3 +153,66 @@
     - terminal
     - mcfly
     - ubuntu
+- name: Check exa installed
+  ansible.builtin.shell: type exa
+  register: check_exa
+  ignore_errors: true
+  tags:
+    - terminal
+    - exa
+- name: Install exa linux
+  become: yes
+  # TODO: How to make this grab latest?
+  ansible.builtin.shell: |
+    wget -c http://old-releases.ubuntu.com/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
+    apt-get install ./exa_0.9.0-4_amd64.deb
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/Downloads"
+  when: ansible_distribution == "Ubuntu" and check_exa.rc != 0
+  tags:
+    - terminal
+    - exa
+- name: Install exa macos
+  community.general.homebrew:
+    name: "exa"
+    state: latest
+  when: ansible_distribution == "MacOSX" and check_exa.rc != 0
+  tags:
+    - terminal
+    - exa
+- name: Confirm $HOME/.local/bin directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/bin"
+    state: directory
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - fd
+- name: Check fd installed
+  ansible.builtin.shell: type fd
+  register: check_fd
+  ignore_errors: true
+  tags:
+    - terminal
+    - fd
+- name: Install fd linux
+  become: yes
+  ansible.builtin.shell: apt install fd-find
+  when: ansible_distribution == "Ubuntu" and check_fd.rc != 0
+  tags:
+    - terminal
+    - fd
+- name: Linux fd Ubuntu
+  ansible.builtin.shell: ln -s $(which fdfind) ~/.local/bin/fd
+  when: ansible_distribution == "Ubuntu" and check_fd.rc != 0
+  tags:
+    - terminal
+    - fd
+- name: Install fd macos
+  community.general.homebrew:
+    name: "fd"
+    state: latest
+  when: ansible_distribution == "MacOSX" and check_fd.rc != 0
+  tags:
+    - terminal
+    - fd
