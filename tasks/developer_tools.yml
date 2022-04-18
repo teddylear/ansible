@@ -43,3 +43,16 @@
     luarocks install luacheck
   tags:
     - devTools
+- name: Check sd installed
+  ansible.builtin.shell: type sd
+  register: check_sd
+  ignore_errors: true
+  tags:
+    - devTools
+    - sd
+- name: Install sd
+  ansible.builtin.shell: cargo install sd
+  when: check_sd.rc != 0
+  tags:
+    - devTools
+    - sd
