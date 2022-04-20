@@ -38,3 +38,26 @@
   when: ansible_distribution == "Ubuntu"
   tags:
     - dotfiles
+- name: Clone tree-sitter-cue
+  ansible.builtin.git:
+    repo: 'git@github.com:eonpatapon/tree-sitter-cue.git'
+    dest: "{{ lookup('env', 'HOME') }}/code/tree-sitter-cue"
+    force: yes
+    update: yes
+  tags:
+    - dotfiles
+    - cue
+- name: Make treesitter queries directory for cue
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.config/nvim/queries/cue"
+    state: directory
+  tags:
+    - dotfiles
+    - cue
+- name: Copy cue highlight file
+  ansible.builtin.shell: "cp {{ lookup('env', 'HOME') }}/code/tree-sitter-cue/queries/highlights.scm ."
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/.config/nvim/queries/cue"
+  tags:
+    - dotfiles
+    - cue
