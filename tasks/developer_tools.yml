@@ -56,3 +56,16 @@
   tags:
     - devTools
     - sd
+- name: Check procs installed
+  ansible.builtin.shell: type procs
+  register: check_procs
+  ignore_errors: true
+  tags:
+    - devTools
+    - procs
+- name: Install procs
+  ansible.builtin.shell: cargo install procs
+  when: check_procs.rc != 0
+  tags:
+    - devTools
+    - procs
