@@ -18,14 +18,14 @@
        - devTools
   tasks:
     # TODO: Should have something in beginning for curl and brew installation
-   - include: tasks/window_management.yml
-   - include: tasks/general_apps.yml
-   - include: tasks/terminal.yml
-   - include: tasks/golang.yml
-   - include: tasks/rust.yml
-   - include: tasks/developer_tools.yml
-   - include: tasks/neovim.yml
-   - include: tasks/dotfiles.yml
-   - include: tasks/cargo-tools.yml
-   - include: tasks/dagger.yml
+   - import_tasks: tasks/window_management.yml
+   - import_tasks: tasks/general_apps.yml
+   - import_tasks: tasks/terminal.yml
+   - import_tasks: tasks/golang.yml
+   - import_tasks: tasks/rust.yml
+   - import_tasks: tasks/developer_tools.yml
+   - import_tasks: tasks/neovim.yml
+   - import_tasks: tasks/dotfiles.yml
+   - import_tasks: tasks/cargo-tools.yml
+   - import_tasks: tasks/dagger.yml
 
