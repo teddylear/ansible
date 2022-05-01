@@ -2,7 +2,7 @@
   # Add pre_task stuff to upgrade things like brew/etc
   vars:
     go_version: '1.17.3'
-    rust_version: '1.56.1'
+    rust_version: '1.60.0'
   pre_tasks:
    - name: Update and upgrade apt packages
      become: yes

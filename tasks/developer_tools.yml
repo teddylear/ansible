@@ -69,3 +69,16 @@
   tags:
     - devTools
     - procs
+- name: Check delta installed
+  ansible.builtin.shell: type delta
+  register: check_delta
+  ignore_errors: true
+  tags:
+    - devTools
+    - delta
+- name: Install delta
+  ansible.builtin.shell: cargo install git-delta
+  when: check_delta.rc != 0
+  tags:
+    - devTools
+    - delta
