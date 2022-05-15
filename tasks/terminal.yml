@@ -216,3 +216,16 @@
   tags:
     - terminal
     - fd
+- name: Check bat installed
+  ansible.builtin.shell: type bat
+  register: check_bat
+  ignore_errors: true
+  tags:
+    - terminal
+    - bat
+- name: Install bat
+  ansible.builtin.shell: cargo install --locked bat
+  when:  check_bat.rc != 0
+  tags:
+    - terminal
+    - bat
