@@ -34,11 +34,16 @@
     update: yes
   tags:
     - neovim
+- name: neovim clean
+  become: yes
+  ansible.builtin.shell: make distclean
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
+  tags:
+    - neovim
 - name: neovim build
   become: yes
-  ansible.builtin.shell: |
-    make distclean
-    make CMAKE_BUILD_TYPE=Release install
+  ansible.builtin.shell: make CMAKE_BUILD_TYPE=Release install
   args:
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
   tags:
