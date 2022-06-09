@@ -229,3 +229,16 @@
   tags:
     - terminal
     - bat
+- name: Check mprocs installed
+  ansible.builtin.shell: type mprocs
+  register: check_mprocs
+  ignore_errors: true
+  tags:
+    - terminal
+    - mprocs
+- name: Install mprocs
+  ansible.builtin.shell: cargo install mprocs
+  when:  check_mprocs.rc != 0
+  tags:
+    - terminal
+    - mprocs
