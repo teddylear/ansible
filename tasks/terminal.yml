@@ -242,3 +242,17 @@
   tags:
     - terminal
     - mprocs
+- name: Check zsh evalcache installed
+  stat:
+      path: ~/.oh-my-zsh/custom/plugins/evalcache
+  register: check_evalcache
+  tags:
+    - terminal
+    - evalcache
+- name: Install zsh evalcache
+  ansible.builtin.shell: git clone https://github.com/mroth/evalcache ~/.oh-my-zsh/custom/plugins/evalcache
+  when: not check_evalcache.stat.exists
+  tags:
+    - terminal
+    - evalcache
+
