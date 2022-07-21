@@ -11,3 +11,14 @@
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
   tags:
     - rust
+- name: Check cargo-edit version
+  ansible.builtin.shell: type cargo-add
+  register: check_cargo_edit
+  ignore_errors: true
+  tags:
+    - cargo-edit
+- name: Install cargo-edit
+  ansible.builtin.shell: cargo install cargo-edit
+  when: check_cargo_edit.rc != 0
+  tags:
+    - cargo-edit
