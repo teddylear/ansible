@@ -62,3 +62,72 @@
   tags:
     - tree-sitter-cli
     - rust
+- name: Check bat installed
+  ansible.builtin.shell: type bat
+  register: check_bat
+  ignore_errors: true
+  args:
+      executable: /bin/zsh
+  tags:
+    - rust
+    - bat
+- name: Install bat
+  ansible.builtin.shell: cargo install --locked bat
+  when:  check_bat.rc != 0
+  args:
+      executable: /bin/zsh
+  tags:
+    - rust
+    - bat
+- name: Check sd installed
+  ansible.builtin.shell: type sd
+  register: check_sd
+  ignore_errors: true
+  tags:
+    - rust
+    - sd
+- name: Install sd
+  ansible.builtin.shell: cargo install sd
+  when: check_sd.rc != 0
+  tags:
+    - rust
+    - sd
+- name: Check procs installed
+  ansible.builtin.shell: type procs
+  register: check_procs
+  ignore_errors: true
+  tags:
+    - rust
+    - procs
+- name: Install procs
+  ansible.builtin.shell: cargo install procs
+  when: check_procs.rc != 0
+  tags:
+    - rust
+    - procs
+- name: Check delta installed
+  ansible.builtin.shell: type delta
+  register: check_delta
+  ignore_errors: true
+  tags:
+    - rust
+    - delta
+- name: Install delta
+  ansible.builtin.shell: cargo install git-delta
+  when: check_delta.rc != 0
+  tags:
+    - rust
+    - delta
+- name: Check mprocs installed
+  ansible.builtin.shell: type mprocs
+  register: check_mprocs
+  ignore_errors: true
+  tags:
+    - rust
+    - mprocs
+- name: Install mprocs
+  ansible.builtin.shell: cargo install mprocs
+  when:  check_mprocs.rc != 0
+  tags:
+    - rust
+    - mprocs

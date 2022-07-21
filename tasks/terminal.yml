@@ -216,32 +216,6 @@
   tags:
     - terminal
     - fd
-- name: Check bat installed
-  ansible.builtin.shell: type bat
-  register: check_bat
-  ignore_errors: true
-  tags:
-    - terminal
-    - bat
-- name: Install bat
-  ansible.builtin.shell: cargo install --locked bat
-  when:  check_bat.rc != 0
-  tags:
-    - terminal
-    - bat
-- name: Check mprocs installed
-  ansible.builtin.shell: type mprocs
-  register: check_mprocs
-  ignore_errors: true
-  tags:
-    - terminal
-    - mprocs
-- name: Install mprocs
-  ansible.builtin.shell: cargo install mprocs
-  when:  check_mprocs.rc != 0
-  tags:
-    - terminal
-    - mprocs
 - name: Check zsh evalcache installed
   stat:
       path: ~/.oh-my-zsh/custom/plugins/evalcache
