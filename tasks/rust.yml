@@ -14,11 +14,51 @@
 - name: Check cargo-edit version
   ansible.builtin.shell: type cargo-add
   register: check_cargo_edit
+  args:
+      executable: /bin/zsh
   ignore_errors: true
   tags:
     - cargo-edit
+    - rust
 - name: Install cargo-edit
   ansible.builtin.shell: cargo install cargo-edit
   when: check_cargo_edit.rc != 0
+  args:
+      executable: /bin/zsh
   tags:
     - cargo-edit
+    - rust
+- name: Check stylua version
+  ansible.builtin.shell: type stylua
+  register: check_stylua
+  args:
+      executable: /bin/zsh
+  ignore_errors: true
+  tags:
+    - stylua
+    - rust
+- name: Install stylua
+  ansible.builtin.shell: cargo install stylua
+  when: check_stylua.rc != 0
+  args:
+      executable: /bin/zsh
+  tags:
+    - stylua
+    - rust
+- name: Check tree-sitter-cli version
+  ansible.builtin.shell: type tree-sitter
+  register: check_tree_sitter_cli
+  args:
+      executable: /bin/zsh
+  ignore_errors: true
+  tags:
+    - tree-sitter-cli
+    - rust
+- name: Install tree-sitter-cli
+  ansible.builtin.shell: cargo install tree-sitter-cli
+  when: check_tree_sitter_cli.rc != 0
+  args:
+      executable: /bin/zsh
+  tags:
+    - tree-sitter-cli
+    - rust
