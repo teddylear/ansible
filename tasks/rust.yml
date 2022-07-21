@@ -131,3 +131,19 @@
   tags:
     - rust
     - mprocs
+- name: Check rust-analyzer installed
+  ansible.builtin.shell: type rust-analyzer
+  register: check_rust_analyzer
+  ignore_errors: true
+  tags:
+    - rust
+    - rust-analyzer
+- name: Install rust-analyzer
+  community.general.homebrew:
+    name: rust-analyzer
+    state: latest
+  when: ansible_distribution == "MacOSX" and check_rust_analyzer.rc != 0
+  tags:
+    - rust
+    - rust-analyzer
+# TODO: automate rust-analyzer install ubuntu
