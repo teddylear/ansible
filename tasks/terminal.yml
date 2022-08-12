@@ -17,12 +17,17 @@
   shell: chsh -s {{ zsh_path.stdout }}
   tags:
     - terminal
+- name: Downloads directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/Downloads"
+    state: directory
+  tags:
+    - terminal
+    - fonts
 - name: Check for Hack fonts Ubuntu
   ansible.builtin.shell: fc-list | grep "Hack"
   register: check_hack_fonts
   when: ansible_distribution == "Ubuntu"
-  args:
-      executable: /bin/zsh
   ignore_errors: true
   tags:
     - terminal
@@ -36,7 +41,6 @@
     - terminal
     - fonts
 - name: Install nerd fonts ubuntu
-  become: yes
   ansible.builtin.shell: |
     # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation
     # Download zip
@@ -47,8 +51,13 @@
     fc-cache -f -v
   when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
   args:
-      executable: /bin/zsh
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
+  tags:
+    - terminal
+    - fonts
+- name: Verify nerd fonts install ubuntu
+  ansible.builtin.shell: fc-list | grep "Hack"
+  when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
   tags:
     - terminal
     - fonts
