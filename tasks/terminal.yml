@@ -17,7 +17,42 @@
   shell: chsh -s {{ zsh_path.stdout }}
   tags:
     - terminal
-- name: Tap nerd fonts
+- name: Check for Hack fonts Ubuntu
+  ansible.builtin.shell: fc-list | grep "Hack"
+  register: check_hack_fonts
+  when: ansible_distribution == "Ubuntu"
+  args:
+      executable: /bin/zsh
+  ignore_errors: true
+  tags:
+    - terminal
+    - fonts
+- name: Make local fonts directory
+  file:
+    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
+    state: directory
+  when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
+  tags:
+    - terminal
+    - fonts
+- name: Install nerd fonts ubuntu
+  become: yes
+  ansible.builtin.shell: |
+    # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation
+    # Download zip
+    curl -LO https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
+    # Unzip to location
+    unzip Hack-v3.003-ttf.zip -d {{ lookup('env', 'HOME') }}/.local/share/fonts
+    # Clear and regen font cache
+    fc-cache -f -v
+  when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
+  args:
+      executable: /bin/zsh
+      chdir: "{{ lookup('env', 'HOME') }}/Downloads"
+  tags:
+    - terminal
+    - fonts
+- name: Tap nerd fonts MacOS
   community.general.homebrew_tap:
     name: homebrew/cask-fonts
     state: present
@@ -25,6 +60,7 @@
   tags:
     - terminal
     - macos
+    - fonts
 - name: Install fonts
   community.general.homebrew_cask:
     name: font-hack-nerd-font
@@ -33,6 +69,7 @@
   tags:
     - terminal
     - macos
+    - fonts
 - name: Install alacritty
   community.general.homebrew_cask:
     name: alacritty
