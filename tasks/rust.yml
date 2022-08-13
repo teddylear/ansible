@@ -138,7 +138,7 @@
   tags:
     - rust
     - rust-analyzer
-- name: Install rust-analyzer
+- name: Install rust-analyzer Macos
   community.general.homebrew:
     name: rust-analyzer
     state: latest
@@ -146,4 +146,18 @@
   tags:
     - rust
     - rust-analyzer
-# TODO: automate rust-analyzer install ubuntu
+- name: Install rust-analyzer Ubuntu
+  ansible.builtin.shell: |
+    # TODO: Can we figure out platform
+    curl -L https://github.com/rust-lang/rust-analyzer/releases/latest/download/rust-analyzer-x86_64-unknown-linux-gnu.gz | gunzip -c - > /usr/local/bin/rust-analyzer
+    chmod +x /usr/local/bin/rust-analyzer
+  when: ansible_distribution == "Ubuntu" and check_rust_analyzer.rc != 0
+  tags:
+    - rust
+    - rust-analyzer
+- name: Verify rust-analyzer installed Ubuntu
+  ansible.builtin.shell: type rust-analyzer
+  when: ansible_distribution == "Ubuntu" and check_rust_analyzer.rc != 0
+  tags:
+    - rust
+    - rust-analyzer

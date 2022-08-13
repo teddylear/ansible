@@ -24,4 +24,4 @@ WORKDIR /home/docker
 
 FROM teddy
 COPY . .
-CMD ["sh", "-c", "ansible-playbook local.yml -b --tags \"fonts\""]
+CMD ["sh", "-c", "ansible-playbook local.yml -b --tags \"rust-analyzer\""]
