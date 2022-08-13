@@ -24,6 +24,25 @@
   tags:
     - terminal
     - fonts
+- name: Install unzip
+  become: yes
+  apt:
+    name: unzip
+    state: latest
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
+    - fonts
+- name: Install fontconfig
+  become: yes
+  apt:
+    name: fontconfig
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - terminal
+    - ubuntu
+    - fonts
 - name: Check for Hack fonts Ubuntu
   ansible.builtin.shell: fc-list | grep "Hack"
   register: check_hack_fonts
@@ -32,26 +51,19 @@
   tags:
     - terminal
     - fonts
-- name: Make local fonts directory
-  file:
-    path: "{{ lookup('env', 'HOME') }}/.local/share/fonts"
-    state: directory
-  when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
-  tags:
-    - terminal
-    - fonts
-- name: Install nerd fonts ubuntu
+- name: Install Hack Nerd font
+  become: yes
   ansible.builtin.shell: |
     # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation
     # Download zip
-    curl -LO https://github.com/source-foundry/Hack/releases/download/v3.003/Hack-v3.003-ttf.zip
+    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
     # Unzip to location
-    unzip Hack-v3.003-ttf.zip -d {{ lookup('env', 'HOME') }}/.local/share/fonts
+    unzip Hack.zip -d /usr/share/fonts
     # Clear and regen font cache
     fc-cache -f -v
   when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
   args:
-      chdir: "{{ lookup('env', 'HOME') }}/Downloads"
+      chdir: "/tmp"
   tags:
     - terminal
     - fonts

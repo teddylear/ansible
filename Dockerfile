@@ -10,16 +10,18 @@ RUN apt update && \
     apt install -y curl git ansible build-essential && \
     apt-get clean autoclean && \
     apt-get autoremove --yes && \
-    apt install -y unzip && \
-    apt install -y fontconfig
+    apt install -y sudo
 
 FROM base AS teddy
-ARG TAGS
-RUN addgroup --gid 1000 teddylear
-RUN adduser --gecos teddylear --uid 1000 --gid 1000 --disabled-password teddylear
-USER teddylear
-WORKDIR /home/teddylear
+# https://dev.to/emmanuelnk/using-sudo-without-password-prompt-as-non-root-docker-user-52bg
+RUN adduser --disabled-password \
+--gecos '' docker
+RUN adduser docker sudo
+RUN echo '%sudo ALL=(ALL) NOPASSWD:ALL' >> \
+/etc/sudoers
+USER docker
+WORKDIR /home/docker
 
 FROM teddy
 COPY . .
-CMD ["sh", "-c", "ansible-playbook local.yml --tags \"fonts\""]
+CMD ["sh", "-c", "ansible-playbook local.yml -b --tags \"fonts\""]
