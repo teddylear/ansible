@@ -52,3 +52,16 @@
   tags:
     - brave
     - ubuntu
+- name: Check okular installed
+  ansible.builtin.shell: type okular
+  register: check_okular
+  ignore_errors: true
+  tags:
+    - okular
+- name: Install okular linux
+  become: yes
+  apt:
+    name: okular
+  when: ansible_distribution == "Ubuntu" and check_okular.rc != 0
+  tags:
+    - okular
