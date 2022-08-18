@@ -2,6 +2,7 @@
   blockinfile:
     path: "{{ lookup('env', 'HOME') }}/.gitconfig"
     block: |
+
       [core]
           pager = delta
 
@@ -17,5 +18,12 @@
 
       [diff]
           colorMoved = default
+
+      [push]
+          autoSetupRemote = true
+
+      [pull]
+          rebase = true
+
   tags:
     - gitconfig
