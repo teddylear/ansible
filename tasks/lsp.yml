@@ -66,7 +66,7 @@
     - lsp
     - terraform-ls
 - name: Check bashls installed
-  ansible.builtin.shell: type bashls
+  ansible.builtin.shell: type bash-language-server
   register: check_bashls
   ignore_errors: true
   tags:
@@ -84,3 +84,26 @@
   tags:
     - lsp
     - bashls
+- name: Check sumneko_lua installed
+  ansible.builtin.shell: type lua-language-server
+  register: check_sumneko_lua
+  ignore_errors: true
+  tags:
+    - lsp
+    - sumneko_lua
+- name: Install sumneko_lua
+  when: ansible_distribution == "MacOSX" and check_sumneko_lua.rc != 0
+  community.general.homebrew:
+    name: lua-language-server
+    state: latest
+  tags:
+    - lsp
+    - sumneko_lua
+# TODO: Add linux install
+# Look at primes: https://github.com/ThePrimeagen/ansible/blob/master/tasks/lsp.yml
+- name: Valid sumneko_lua installed
+  when: check_sumneko_lua.rc != 0
+  ansible.builtin.shell: type lua-language-server
+  tags:
+    - lsp
+    - sumneko_lua
