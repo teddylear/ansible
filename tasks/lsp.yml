@@ -1,0 +1,68 @@
+- name: Check pyright installed
+  ansible.builtin.shell: type pyright
+  register: check_pyright
+  ignore_errors: true
+  tags:
+    - lsp
+    - pyright
+- name: Install pyright
+  when: check_pyright.rc != 0
+  shell: |
+    pip install pyright
+  tags:
+    - lsp
+    - pyright
+- name: Valid pyright installed
+  when: check_pyright.rc != 0
+  ansible.builtin.shell: type pyright
+  tags:
+    - lsp
+    - pyright
+- name: Check terraform-ls installed
+  ansible.builtin.shell: type terraform-ls
+  register: check_terraform_ls
+  ignore_errors: true
+  tags:
+    - lsp
+    - terraform-ls
+- name: Install gpg linux
+  when: ansible_distribution == "Ubuntu" and check_terraform_ls.rc != 0
+  become: yes
+  apt:
+    name: gpg
+    update_cache: yes
+  tags:
+    - lsp
+    - terraform-ls
+- name: setup hashicorp repo
+  become: true
+  when: ansible_distribution == "Ubuntu" and check_terraform_ls.rc != 0
+  shell: |
+    wget -O- https://apt.releases.hashicorp.com/gpg | gpg --dearmor | sudo tee /usr/share/keyrings/hashicorp-archive-keyring.gpg
+    echo "deb [signed-by=/usr/share/keyrings/hashicorp-archive-keyring.gpg] https://apt.releases.hashicorp.com $(lsb_release -cs) main" | sudo tee /etc/apt/sources.list.d/hashicorp.list
+  tags:
+    - lsp
+    - terraform-ls
+- name: terraform-ls apt installation
+  when: ansible_distribution == "Ubuntu" and check_terraform_ls.rc != 0
+  become: true
+  apt:
+    update_cache: yes
+    name: terraform-ls
+  tags:
+    - lsp
+    - terraform-ls
+- name: Install terraform-ls macos
+  community.general.homebrew:
+    name: "hashicorp/tap/terraform-ls"
+    state: latest
+  when: ansible_distribution == "MacOSX" and check_terraform_ls.rc != 0
+  tags:
+    - lsp
+    - terraform-ls
+- name: Valid terraform-ls installed
+  when: check_terraform_ls.rc != 0
+  ansible.builtin.shell: type terraform-ls
+  tags:
+    - lsp
+    - terraform-ls
