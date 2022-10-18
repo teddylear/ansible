@@ -7,8 +7,7 @@
     - pyright
 - name: Install pyright
   when: check_pyright.rc != 0
-  shell: |
-    pip install pyright
+  shell: pip install pyright
   tags:
     - lsp
     - pyright
@@ -66,3 +65,22 @@
   tags:
     - lsp
     - terraform-ls
+- name: Check bashls installed
+  ansible.builtin.shell: type bashls
+  register: check_bashls
+  ignore_errors: true
+  tags:
+    - lsp
+    - bashls
+- name: Install bashls
+  when: check_bashls.rc != 0
+  shell: npm i -g bash-language-server
+  tags:
+    - lsp
+    - bashls
+- name: Valid bashls installed
+  when: check_bashls.rc != 0
+  ansible.builtin.shell: type bash-language-server
+  tags:
+    - lsp
+    - bashls
