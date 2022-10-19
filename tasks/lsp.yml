@@ -99,8 +99,32 @@
   tags:
     - lsp
     - sumneko_lua
-# TODO: Add linux install
-# Look at primes: https://github.com/ThePrimeagen/ansible/blob/master/tasks/lsp.yml
+# From Primegen for installing on Ubuntu
+- name: Download sumneko lua lsp github
+  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
+  ansible.builtin.git:
+    repo: "git@github.com:sumneko/lua-language-server.git"
+    recursive: yes
+    dest: "{{ lookup('env', 'HOME') }}/code/sumneko"
+  tags:
+    - lsp
+    - sumneko_lua
+- name: Install script sumneko lua lsp
+  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
+  ansible.builtin.shell:
+    cmd: ./compile/install.sh
+    chdir: "{{ lookup('env', 'HOME') }}/code/sumneko/3rd/luamake"
+  tags:
+    - install
+    - lsp
+- name: rebuild sumneko lua lsp
+  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
+  ansible.builtin.shell:
+    cmd: ./3rd/luamake/luamake rebuild
+    chdir: "{{ lookup('env', 'HOME') }}/code/sumneko"
+  tags:
+    - install
+    - lsp
 - name: Valid sumneko_lua installed
   when: check_sumneko_lua.rc != 0
   ansible.builtin.shell: type lua-language-server
