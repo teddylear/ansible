@@ -125,14 +125,6 @@
   tags:
     - sumneko_lua
     - lsp
-- name: rebuild sumneko lua lsp
-  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
-  ansible.builtin.shell:
-    cmd: ./3rd/luamake/luamake rebuild
-    chdir: "{{ lookup('env', 'HOME') }}/code/sumneko"
-  tags:
-    - sumneko_lua
-    - lsp
 - name: Create symlink to /usr/local/bin
   when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
   become: yes
