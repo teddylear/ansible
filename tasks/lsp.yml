@@ -115,7 +115,7 @@
     cmd: ./compile/install.sh
     chdir: "{{ lookup('env', 'HOME') }}/code/sumneko/3rd/luamake"
   tags:
-    - install
+    - sumneko_lua
     - lsp
 - name: rebuild sumneko lua lsp
   when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
@@ -123,7 +123,23 @@
     cmd: ./3rd/luamake/luamake rebuild
     chdir: "{{ lookup('env', 'HOME') }}/code/sumneko"
   tags:
-    - install
+    - sumneko_lua
+    - lsp
+- name: rebuild sumneko lua lsp
+  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
+  ansible.builtin.shell:
+    cmd: ./3rd/luamake/luamake rebuild
+    chdir: "{{ lookup('env', 'HOME') }}/code/sumneko"
+  tags:
+    - sumneko_lua
+    - lsp
+- name: Create symlink to /usr/local/bin
+  when: ansible_distribution == "Ubuntu" and check_sumneko_lua.rc != 0
+  become: yes
+  ansible.builtin.shell:
+    cmd: "ln -s {{ lookup('env', 'HOME') }}/code/sumneko/bin/lua-language-server /usr/local/bin/lua-language-server"
+  tags:
+    - sumneko_lua
     - lsp
 - name: Valid sumneko_lua installed
   when: check_sumneko_lua.rc != 0
