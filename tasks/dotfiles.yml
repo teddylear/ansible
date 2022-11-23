@@ -32,6 +32,7 @@
   ansible.builtin.shell: |
     stow -R i3
     stow -R compton
+    stow -R polybar
   args:
       executable: /bin/zsh
       chdir: "{{ lookup('env', 'HOME') }}/shell_config"

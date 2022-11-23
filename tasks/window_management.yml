@@ -45,3 +45,25 @@
     - window_management
     - ubuntu
     - i3-gaps
+- name: Check polybar installed
+  ansible.builtin.shell: type polybar
+  become: yes
+  register: check_polybar
+  ignore_errors: true
+  when: ansible_distribution == "Ubuntu"
+  tags:
+    - window_management
+    - ubuntu
+    - polybar
+- name: Install polybar
+  become: yes
+  when: check_polybar.rc != 0
+  when: ansible_distribution == "Ubuntu"
+  apt:
+    name: "polybar"
+    update_cache: yes
+    state: latest
+  tags:
+    - window_management
+    - ubuntu
+    - polybar
