@@ -57,8 +57,7 @@
     - polybar
 - name: Install polybar
   become: yes
-  when: check_polybar.rc != 0
-  when: ansible_distribution == "Ubuntu"
+  when: ansible_distribution == "Ubuntu" and check_polybar.rc != 0
   apt:
     name: "polybar"
     update_cache: yes
