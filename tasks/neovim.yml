@@ -55,3 +55,11 @@
     depth: 1
   tags:
     - neovim
+- name: Clone aws-iam-actions-list
+  ansible.builtin.git:
+    repo: 'git@github.com:TryTryAgain/aws-iam-actions-list.git'
+    dest: "{{ lookup('env', 'HOME') }}/code/aws-iam-actions-list"
+    force: yes
+    update: yes
+  tags:
+    - neovim
