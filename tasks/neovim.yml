@@ -41,6 +41,13 @@
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
   tags:
     - neovim
+- name: empty nvim runtime directory
+  become: yes
+  ansible.builtin.shell: rm -rf ./*
+  args:
+      chdir: "/usr/local/share/nvim/runtime"
+  tags:
+    - neovim
 - name: neovim build
   become: yes
   ansible.builtin.shell: make CMAKE_BUILD_TYPE=Release install
