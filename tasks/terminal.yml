@@ -57,9 +57,9 @@
   ansible.builtin.shell: |
     # https://github.com/ryanoasis/nerd-fonts/tree/master/patched-fonts/Hack#quick-installation
     # Download zip
-    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v2.1.0/Hack.zip
+    curl -LO https://github.com/ryanoasis/nerd-fonts/releases/download/v3.0.2/Meslo.zip
     # Unzip to location
-    unzip Hack.zip -d /usr/share/fonts
+    unzip Meslo.zip -d /usr/share/fonts
     # Clear and regen font cache
     fc-cache -f -v
   when: ansible_distribution == "Ubuntu" and check_hack_fonts.rc != 0
