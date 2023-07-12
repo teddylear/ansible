@@ -85,7 +85,7 @@
     - fonts
 - name: Install fonts
   community.general.homebrew_cask:
-    name: font-hack-nerd-font
+    name: font-meslo-lg-nerd-font
     state: present
   when: ansible_distribution == "MacOSX"
   tags:
@@ -136,19 +136,20 @@
   tags:
     - terminal
     - zsh
-- name: Check zsh spaceship installed
+- name: Check zsh powerlevel10k installed
   stat:
-      path: ~/.oh-my-zsh/custom/plugins/spaceship
-  register: check_spaceship
+      path: ~/.oh-my-zsh/custom/themes/powerlevel10k
+  register: check_powerlevel10k
   tags:
+    - powerlevel10k
     - terminal
     - zsh
-- name: Install zsh spaceship
+- name: Install zsh powerlevel10k
   ansible.builtin.shell: |
-    git clone https://github.com/spaceship-prompt/spaceship-prompt.git "$ZSH_CUSTOM/themes/spaceship-prompt" --depth=1
-    ln -s "$ZSH_CUSTOM/themes/spaceship-prompt/spaceship.zsh-theme" "$ZSH_CUSTOM/themes/spaceship.zsh-theme"
-  when: not check_spaceship.stat.exists
+    git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+  when: not check_powerlevel10k.stat.exists
   tags:
+    - powerlevel10k
     - terminal
     - evalcache
     - zsh
