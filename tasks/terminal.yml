@@ -231,33 +231,34 @@
     - terminal
     - mcfly
     - ubuntu
-- name: Check exa installed
-  ansible.builtin.shell: type exa
-  register: check_exa
+- name: Check eza installed
+  ansible.builtin.shell: type eza
+  register: check_eza
   ignore_errors: true
   tags:
     - terminal
-    - exa
-- name: Install exa linux
+    - eza
+- name: Install eza linux
   become: yes
   # TODO: How to make this grab latest?
+  # also update this for eza
   ansible.builtin.shell: |
     wget -c http://old-releases.ubuntu.com/ubuntu/pool/universe/r/rust-exa/exa_0.9.0-4_amd64.deb
     apt-get install ./exa_0.9.0-4_amd64.deb
   args:
       chdir: "{{ lookup('env', 'HOME') }}/Downloads"
-  when: ansible_distribution == "Ubuntu" and check_exa.rc != 0
+  when: ansible_distribution == "Ubuntu" and check_eza.rc != 0
   tags:
     - terminal
-    - exa
-- name: Install exa macos
+    - eza
+- name: Install eza macos
   community.general.homebrew:
-    name: "exa"
+    name: "eza"
     state: latest
-  when: ansible_distribution == "MacOSX" and check_exa.rc != 0
+  when: ansible_distribution == "MacOSX" and check_eza.rc != 0
   tags:
     - terminal
-    - exa
+    - eza
 - name: Confirm $HOME/.local/bin directory
   file:
     path: "{{ lookup('env', 'HOME') }}/.local/bin"
