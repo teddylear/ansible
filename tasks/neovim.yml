@@ -55,6 +55,12 @@
       chdir: "{{ lookup('env', 'HOME') }}/code/neovim"
   tags:
     - neovim
+- name: neovim update plugins to match lockfile
+  ansible.builtin.shell: nvim --headless "+Lazy! restore" +qa
+  args:
+      chdir: "{{ lookup('env', 'HOME') }}"
+  tags:
+    - neovim
 - name: Clone aws-iam-actions-list
   ansible.builtin.git:
     repo: 'git@github.com:TryTryAgain/aws-iam-actions-list.git'
