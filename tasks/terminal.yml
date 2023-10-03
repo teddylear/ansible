@@ -1,17 +1,3 @@
-- name: Install zsh
-  become: yes
-  apt:
-    name: zsh
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - terminal
-    - zsh
-- name: zsh path
-  shell: which zsh
-  register: zsh_path
-  tags:
-    - terminal
-    - zsh
 - name: Change shell to zsh
   become: yes
   shell: chsh -s {{ zsh_path.stdout }}
@@ -24,16 +10,6 @@
     state: directory
   tags:
     - terminal
-    - fonts
-- name: Install unzip
-  become: yes
-  apt:
-    name: unzip
-    state: latest
-  when: ansible_distribution == "Ubuntu"
-  tags:
-    - terminal
-    - ubuntu
     - fonts
 - name: Install fontconfig
   become: yes
@@ -179,15 +155,6 @@
   tags:
     - terminal
     - neofetch
-- name: Install neofetch macos
-  community.general.homebrew:
-    name: "neofetch"
-    state: latest
-  when: ansible_distribution == "MacOSX" and neofetch_installed is failed
-  tags:
-    - terminal
-    - neofetch
-    - macos
 - name: Install neofetch Ubuntu
   become: yes
   apt:
@@ -205,24 +172,6 @@
   tags:
     - terminal
     - mcfly
-- name: Tap Mcfly macos
-  community.general.homebrew_tap:
-    name: cantino/mcfly
-    state: present
-  when: ansible_distribution == "MacOSX" and mcfly_installed is failed
-  tags:
-    - terminal
-    - mcfly
-    - macos
-- name: Install Mcfly macos
-  community.general.homebrew:
-    name: "mcfly"
-    state: latest
-  when: ansible_distribution == "MacOSX" and mcfly_installed is failed
-  tags:
-    - terminal
-    - mcfly
-    - macos
 - name: Install Mcfly Ubuntu
   shell: curl -LSfs https://raw.githubusercontent.com/cantino/mcfly/master/ci/install.sh | sh -s -- --git cantino/mcfly
   become: yes
@@ -284,14 +233,6 @@
 - name: Linux fd Ubuntu
   ansible.builtin.shell: ln -s $(which fdfind) ~/.local/bin/fd
   when: ansible_distribution == "Ubuntu" and check_fd.rc != 0
-  tags:
-    - terminal
-    - fd
-- name: Install fd macos
-  community.general.homebrew:
-    name: "fd"
-    state: latest
-  when: ansible_distribution == "MacOSX" and check_fd.rc != 0
   tags:
     - terminal
     - fd
