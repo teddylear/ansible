@@ -6,6 +6,14 @@
   tags:
     - vlc
     - macos
+- name: 1password Macos
+  community.general.homebrew_cask:
+    name: "1password"
+    state: latest
+  when: ansible_distribution == "MacOSX"
+  tags:
+    - 1password
+    - macos
 - name: VLC Media player Ubuntu
   apt:
     name: "vlc"
